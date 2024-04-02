@@ -1,0 +1,74 @@
+{% extends "base.html" %}
+
+{% block title %}Custom Page Title{% endblock %}
+
+{% block additional_css %}
+<style>
+    /* Additional CSS for tablet view */
+    ul {
+        display: flex;
+        flex-wrap: wrap;
+        justify-content: space-around;
+        padding: 0;
+    }
+
+    li {
+        list-style: none;
+        width: 45%; /* Adjust as needed */
+        margin-bottom: 20px;
+        border: 1px solid #ccc;
+        border-radius: 8px;
+        padding: 10px;
+        text-align: center;
+        position: relative; /* Added for positioning the delete button */
+    }
+
+    img {
+        max-width: 100%;
+        height: auto;
+        border-radius: 8px;
+        max-height: 200px; /* Adjust as needed */
+    }
+
+    h1,
+    h2 {
+        text-align: center;
+    }
+
+    .delete-btn {
+        position: absolute;
+        top: 10px;
+        right: 10px;
+        background-color: #ff0000;
+        color: #fff;
+        padding: 5px 10px;
+        border: none;
+        border-radius: 5px;
+        cursor: pointer;
+    }
+</style>
+{% endblock %}
+
+{% block content %}
+<h1>{{ user.first_name }} {{ user.surname }}</h1>
+<h2>My Apartments:</h2>
+{% if user_apartments %}
+<ul>
+    {% for apartment in user_apartments %}
+    <li>
+        <form action="{{ url_for('delete_apartment', apartment_id=apartment.id) }}" method="post">
+            <button type="submit" class="delete-btn">Delete</button>
+        </form>
+        <a href="{{ url_for('list_rooms', apartment_id=apartment.id) }}">
+            <img src="{{ url_for('static', filename='uploads/' + apartment.image) }}" alt="{{ apartment.name }}">
+        </a>
+        <h3>{{ apartment.name }}</h3>
+        <p>{{ apartment.address }}</p>
+    </li>
+    {% endfor %}
+</ul>
+{% else %}
+<p>No apartment available.</p>
+{% endif %}
+
+{% endblock %}

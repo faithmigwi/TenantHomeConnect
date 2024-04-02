@@ -1,0 +1,77 @@
+{% extends "base.html" %}
+
+{% block title %}Tenant Dashboard{% endblock %}
+
+{% block additional_css %}
+    <style>
+        /* Additional CSS for Tenant Dashboard */
+        h1, h2 {
+            text-align: center;
+            margin-top: 20px;
+        }
+
+        /* Flexbox grid layout */
+        .tablet-container {
+            display: flex;
+            flex-wrap: wrap;
+            justify-content: center;
+        }
+
+        .tablet {
+            width: 300px; /* Adjust as needed */
+            margin: 10px;
+            padding: 20px;
+            border: 1px solid #ccc;
+            border-radius: 8px;
+            background-color: #f9f9f9;
+            box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+        }
+
+        .tablet h3 {
+            text-align: center;
+        }
+
+        .tablet p {
+            margin-top: 10px;
+        }
+    </style>
+{% endblock %}
+
+{% block content %}
+    <h1>Welcome, {{ tenant_name }}!</h1>
+
+    <h2>Vacant Rooms</h2>
+    <div class="tablet-container">
+        {% for room in vacant_rooms %}
+            <div class="tablet">
+                <h3>{{ room.building_name }}</h3>
+                <p><strong>Room Number:</strong> {{ room.room_number }}</p>
+                <p><strong>Availability:</strong> {{ room.availability }}</p>
+                <p><strong>Area:</strong> {{ room.area }}</p>
+                <p><strong>Price:</strong> {{ room.price }}</p>
+                <p><strong>Facilities:</strong> {{ room.facilities }}</p>
+                <p><strong>Description:</strong> {{ room.description }}</p>
+                <a href="{{ url_for('room_deals', room_id=room.id) }}">View Details</a>
+            </div>
+        {% endfor %}
+    </div>
+
+    <h2>Your Bookings</h2>
+    <div class="tablet-container">
+        {% for booking in bookings %}
+            <div class="tablet">
+                <h3>Booking ID: {{ booking.id }}</h3>
+                <p><strong>Apartment:</strong> {{ booking.apartment }}</p>
+                <p><strong>Room Number:</strong> {{ booking.room_number }}</p>
+                <p><strong>Landlord:</strong> {{ booking.land_lord }}</p>
+                <p class="{% if not booking.approve %}pending{% endif %}">
+                    <strong>Status:</strong> {{ "Approved" if booking.approve else "Pending" }}
+                </p>
+            </div>
+        {% endfor %}
+    </div>
+{% endblock %}
+
+{% block additional_scripts %}
+    <!-- Additional JS scripts specific to this page -->
+{% endblock %}

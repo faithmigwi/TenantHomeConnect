@@ -1,0 +1,60 @@
+{% extends "base.html" %}
+
+{% block title %}Custom Page Title{% endblock %}
+
+{% block additional_css %}
+<style>
+    /* Additional CSS for tablet view */
+    ul {
+        display: flex;
+        flex-wrap: wrap;
+        justify-content: space-around;
+        padding: 0;
+    }
+
+    li {
+        list-style: none;
+        width: 45%; /* Adjust as needed */
+        margin-bottom: 20px;
+        border: 1px solid #ccc;
+        border-radius: 8px;
+        padding: 10px;
+        text-align: center;
+    }
+
+    img {
+        max-width: 100%;
+        height: auto;
+        border-radius: 8px;
+        max-height: 200px; /* Adjust as needed */
+    }
+
+    h1,
+    h2 {
+        text-align: center;
+    }
+</style>
+{% endblock %}
+
+{% block content %}
+
+<h4>Room Requests:</h4>
+<ul>
+    {% for booking in user_bookings %}
+        <li>
+            <h3>Apartment: {{ booking.apartment }}</h3>
+            <p>Room Number: {{ booking.room_number }}</p>
+            <p>Landlord: {{ booking.land_lord }}</p>
+            {% if booking.approve %}
+                <p>Status: Approved</p>
+            {% else %}
+                <form action="{{ url_for('approve_booking', booking_id=booking.id) }}" method="post">
+                    <button type="submit">Approve</button>
+                </form>
+                <p>Status: Pending Approval</p>
+            {% endif %}
+        </li>
+    {% endfor %}
+</ul>
+
+{% endblock %}

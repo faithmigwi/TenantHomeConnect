@@ -1,0 +1,33 @@
+{% extends "base.html" %}
+
+{% block title %}Custom Page Title{% endblock %}
+
+{% block additional_css %}
+    <!-- Additional CSS files specific to this page -->
+{% endblock %}
+
+{% block content %}
+
+    <h1>Rooms in {{ apartment.name }}</h1>
+    <div>
+        {% for room in rooms %}
+            <div>
+                <form action="{{ url_for('delete_room', room_id=room.id) }}" method="post">
+                    <button type="submit" class="delete-btn">Delete</button>
+                </form>
+                <h2>Room Number: {{ room.room_number }}</h2>
+                <p>Availability: {{ room.availability }}</p>
+                <p>Area: {{ room.area }}</p>
+                <p>Price: {{ room.price }}</p>
+                <p>Facilities: {{ room.facilities }}</p>
+                <p>Description: {{ room.description }}</p>
+                <!-- Add more room details as needed -->
+            </div>
+            <hr>
+        {% endfor %}
+    </div>
+{% endblock %}
+
+{% block additional_scripts %}
+    <!-- Additional JS scripts specific to this page -->
+{% endblock %}

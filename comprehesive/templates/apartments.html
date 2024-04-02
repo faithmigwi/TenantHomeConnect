@@ -1,0 +1,76 @@
+{% extends "base.html" %}
+
+{% block title %}Custom Page Title{% endblock %}
+
+{% block additional_css %}
+    <style>
+        /* Custom CSS for the page */
+        .apartment-container {
+            display: flex;
+            flex-wrap: wrap;
+            justify-content: space-around;
+            padding: 20px;
+        }
+
+        .apartment-card {
+            width: 300px;
+            background-color: #ffffff;
+            border-radius: 10px;
+            box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+            margin-bottom: 20px;
+            transition: transform 0.3s ease;
+        }
+
+        .apartment-card:hover {
+            transform: translateY(-5px);
+        }
+
+        .apartment-image {
+            width: 100%;
+            border-top-left-radius: 10px;
+            border-top-right-radius: 10px;
+        }
+
+        .apartment-details {
+            padding: 20px;
+        }
+
+        .apartment-name {
+            font-size: 20px;
+            font-weight: bold;
+            margin-bottom: 10px;
+        }
+
+        .apartment-address {
+            color: #666666;
+            margin-bottom: 10px;
+        }
+
+        .apartment-link {
+            text-decoration: none;
+            color: inherit;
+        }
+    </style>
+{% endblock %}
+
+{% block content %}
+    <!-- Content specific to this page -->
+    <div class="apartment-container">
+        {% for apartment in apartments %}
+            <div class="apartment-card">
+                <a href="{{ url_for('list_rooms', apartment_id=apartment.id) }}" class="apartment-link">
+                    <img src="{{ url_for('static', filename='uploads/' + apartment.image) }}" alt="{{ apartment.name }}" class="apartment-image">
+                    <div class="apartment-details">
+                        <div class="apartment-name">{{ apartment.name }}</div>
+                        <div class="apartment-address">Address: {{ apartment.address }}, {{ apartment.city }}</div>
+                        <!-- Add more apartment details as needed -->
+                    </div>
+                </a>
+            </div>
+        {% endfor %}
+    </div>
+{% endblock %}
+
+{% block additional_scripts %}
+    <!-- Additional JS scripts specific to this page -->
+{% endblock %}

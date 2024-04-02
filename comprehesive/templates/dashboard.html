@@ -1,0 +1,58 @@
+{% extends "base.html" %}
+
+{% block title %}Custom Page Title{% endblock %}
+
+{% block additional_css %}
+<style>
+    /* Additional CSS for tablet view */
+    ul {
+        display: flex;
+        flex-wrap: wrap;
+        justify-content: space-around;
+        padding: 0;
+    }
+
+    li {
+        list-style: none;
+        width: 45%; /* Adjust as needed */
+        margin-bottom: 20px;
+        border: 1px solid #ccc;
+        border-radius: 8px;
+        padding: 10px;
+        text-align: center;
+    }
+
+    img {
+        max-width: 100%;
+        height: auto;
+        border-radius: 8px;
+        max-height: 200px; /* Adjust as needed */
+    }
+
+    h1,
+    h2 {
+        text-align: center;
+    }
+</style>
+{% endblock %}
+
+{% block content %}
+<h1>{{ user.first_name }} {{ user.surname }}</h1>
+<h2>My Apartments:</h2>
+{% if user_apartments %}
+<ul>
+    {% for apartment in user_apartments %}
+    <li>
+        <a href="{{ url_for('list_rooms', apartment_id=apartment.id) }}">
+            <img src="{{ url_for('static', filename='uploads/' + apartment.image) }}" alt="{{ apartment.name }}">
+        </a>
+        <h3>{{ apartment.name }}</h3>
+        <p>{{ apartment.address }}</p>
+    </li>
+    {% endfor %}
+</ul>
+{% else %}
+<p>No apartment available.</p>
+{% endif %}
+
+{% endblock %}

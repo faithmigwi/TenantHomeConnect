@@ -1,0 +1,56 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Background Image with Centered Text</title>
+    <style>
+        body {
+            margin: 0;
+            padding: 0;
+            font-family: Arial, sans-serif;
+            background-image: url('{{ background_image }}'); /* Dynamic path to background image */
+            background-size: cover;
+            background-position: center;
+            height: 100vh; /* Ensure full viewport height */
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            flex-direction: column; /* Align items vertically */
+        }
+        .centered-text {
+            text-align: center;
+            color: white;
+            font-size: 24px;
+            text-shadow: 2px 2px 4px rgba(0, 0, 0, 0.5); /* Add shadow to text for better visibility */
+            margin-bottom: 20px; /* Add margin below h1 */
+        }
+        .button-container {
+            display: flex;
+            gap: 20px; /* Add space between buttons */
+        }
+        .button {
+            padding: 10px 20px;
+            background-color: #007bff; /* Blue color for button */
+            color: white;
+            text-decoration: none;
+            border: none;
+            border-radius: 5px;
+            cursor: pointer;
+            transition: background-color 0.3s ease; /* Smooth transition on hover */
+        }
+        .button:hover {
+            background-color: #0056b3; /* Darker shade of blue on hover */
+        }
+    </style>
+</head>
+<body>
+    <div class="centered-text">
+        <h1>Welcome to My Website</h1>
+        <div class="button-container">
+            <a href="/login" class="button">Market House</a>
+            <a href="/tenant_login" class="button">Find House</a>
+        </div>
+    </div>
+</body>
+</html>

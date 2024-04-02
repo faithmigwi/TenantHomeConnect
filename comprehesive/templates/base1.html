@@ -1,0 +1,61 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>{% block title %}DASHBOARD{% endblock %}</title>
+    <!-- Your CSS files here -->
+<link rel="stylesheet" href="{{ url_for('static', filename='css/bootstrap.min.css') }}">
+    <link rel="stylesheet" href="{{ url_for('static', filename='css/fontawesome.min.css') }}">
+    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/font-awesome/4.7.0/css/font-awesome.min.css">
+    <link rel="stylesheet" href="{{url_for('static', filename='css/admindashboard.css')}}">
+    {% block additional_css %}{% endblock %}
+</head>
+<body id="body">
+<div class="container">
+    <nav class="navbar">
+        <div class="nav_icon" onclick="toggleSidebar()">
+            <i class="fa fa-bars" aria-hidden="true"></i>
+        </div>
+
+        <div class="navbar__right">
+
+        </div>
+    </nav>
+
+    <main>
+        {% block content %}{% endblock %}
+    </main>
+
+    <div id="sidebar">
+        <div class="sidebar__title">
+            <div class="sidebar__img">
+                <span><i class="fa fa-home"></i></span>
+                <h1>Dashboard</h1>
+            </div>
+            <i onclick="closeSidebar()" class="fa fa-times" id="sidebarIcon" aria-hidden="true"></i>
+        </div>
+
+        <div class="sidebar__menu">
+          
+
+
+           <div class="sidebar__link">
+            <i class="fa fa-building"></i>
+            <a href="{{url_for('room_request')}}">Room Requests</a>
+          </div>
+           <div class="sidebar__link">
+            <i class="fa fa-building"></i>
+           <a href="{{ url_for('logout') }}">Logout</a>
+
+
+
+
+        </div>
+    </div>
+</div>
+<script src="https://cdn.jsdelivr.net/npm/apexcharts"></script>
+<script src="{{url_for('static', filename='./js/admindashboard.js')}}"></script>
+{% block additional_scripts %}{% endblock %}
+</body>
+</html>

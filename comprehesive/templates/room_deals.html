@@ -1,0 +1,84 @@
+{% extends "base1.html" %}
+
+{% block title %}Room Deals{% endblock %}
+
+{% block additional_css %}
+    <style>
+        /* Additional CSS for Room Deals */
+        body {
+            font-family: Arial, sans-serif;
+            background-color: #f5f5f5;
+            margin: 0;
+            padding: 0;
+        }
+
+        .container {
+            max-width: 4000px;
+            margin: 20px auto;
+            padding: 0 20px;
+        }
+
+        h1, h2 {
+            text-align: center;
+            margin-top: 30px;
+        }
+
+        .room-details {
+            background-color: #fff;
+            border-radius: 8px;
+            box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+            padding: 200px;
+            margin-top: 20px;
+        }
+
+        .room-image {
+            max-width: 100%;
+            height: auto;
+            margin-bottom: 20px;
+        }
+
+        .room-details p {
+            margin: 10px 0;
+        }
+
+        .book-button {
+            background-color: #007bff;
+            color: #fff;
+            border: none;
+            padding: 10px 20px;
+            font-size: 16px;
+            border-radius: 5px;
+            cursor: pointer;
+        }
+
+        .book-button:hover {
+            background-color: #0056b3;
+        }
+    </style>
+{% endblock %}
+
+{% block content %}
+    <div class="container">
+       
+        <div class="room-details">
+            <h2>Room Details</h2>
+            <img src="{{ url_for('static', filename='uploads/' + room.image) }}" alt="Room Photo" class="room-image">
+            <p><strong>Building Name:</strong> {{ room.building_name }}</p>
+            <p><strong>Room Number:</strong> {{ room.room_number }}</p>
+            <p><strong>Availability:</strong> {{ room.availability }}</p>
+            <p><strong>Area:</strong> {{ room.area }}</p>
+            <p><strong>Price:</strong> {{ room.price }}</p>
+            <p><strong>Facilities:</strong> {{ room.facilities }}</p>
+            <p><strong>Description:</strong> {{ room.description }}</p>
+            
+            <!-- Book button -->
+            <form action="{{ url_for('book_room', room_id=room.id) }}" method="post">
+                <button type="submit" class="book-button">Book</button>
+            </form>
+        </div>
+    </div>
+{% endblock %}
+
+{% block additional_scripts %}
+    <!-- Additional JS scripts specific to this page -->
+{% endblock %}

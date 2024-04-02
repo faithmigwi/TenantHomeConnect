@@ -1,0 +1,120 @@
+{% extends "base.html" %}
+
+{% block title %}Room Registration{% endblock %}
+
+{% block additional_css %}
+    <style>
+        /* Add custom CSS styles here */
+        /* Form container */
+        .form-container {
+            max-width: 600px;
+            margin: 20px auto;
+            padding: 20px;
+            background-color: #f9f9f9;
+            border-radius: 8px;
+            box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+        }
+
+        /* Form elements */
+        label {
+            display: block;
+            margin-bottom: 10px;
+            font-weight: bold;
+        }
+
+        input[type="text"],
+        input[type="number"],
+        textarea,
+        select {
+            width: calc(100% - 20px);
+            padding: 10px;
+            margin-bottom: 15px;
+            border: 1px solid #ccc;
+            border-radius: 4px;
+            box-sizing: border-box;
+        }
+
+        input[type="radio"] {
+            margin-right: 5px;
+        }
+
+        button[type="submit"] {
+            background-color: #4caf50;
+            color: white;
+            padding: 10px 20px;
+            border: none;
+            border-radius: 4px;
+            cursor: pointer;
+        }
+
+        button[type="submit"]:hover {
+            background-color: #45a049;
+        }
+    </style>
+{% endblock %}
+
+{% block content %}
+<div class="form-container">
+    <h2>Room Registration</h2>
+    <form action="{{ url_for('show_room_registration_form') }}" method="post" enctype="multipart/form-data">
+        <!-- Building name -->
+        <div>
+            <label for="building_name">Building name</label>
+            <select id="building_name" name="building_name" required>
+                {% for apartment in apartments %}
+                <option value="{{ apartment.name }}">{{ apartment.name }}</option>
+                {% endfor %}
+            </select>
+        </div>
+
+        <!-- Room number -->
+        <div>
+            <label for="room">Room number</label>
+            <input id="room" type="number" name="room" required>
+        </div>
+
+        <!-- Availability -->
+        <div>
+            <h4>Availability</h4>
+            <div>
+                <input type="radio" name="Availability" id="vacant" value="Vacant">
+                <label for="vacant">Vacant</label>
+            </div>
+            <div>
+                <input type="radio" name="Availability" id="occupied" value="Occupied">
+                <label for="occupied">Occupied</label>
+            </div>
+        </div>
+
+        <!-- Area and Rent -->
+        <div>
+            <label for="Area">Area (in sqft)</label>
+            <input id="Area" type="number" name="Area" required>
+        </div>
+        <div>
+            <label for="Price">Rent/Month</label>
+            <input id="Price" type="number" name="Price" required>
+        </div>
+
+        <!-- Facilities -->
+        <div>
+            <label for="Facilities">Facilities</label>
+            <input id="Facilities" type="text" name="Facilities" required>
+        </div>
+
+        <!-- Description -->
+        <div>
+            <label for="Description">Description</label>
+            <textarea id="Description" name="Description" rows="4" required></textarea>
+        </div>
+
+        <!-- Image -->
+        <div>
+            <label for="file">Upload Image</label>
+            <input id="file" type="file" name="file" required>
+        </div>
+
+        <button type="submit">Register Room</button>
+    </form>
+</div>
+{% endblock %}

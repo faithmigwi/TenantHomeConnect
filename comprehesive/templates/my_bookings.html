@@ -1,0 +1,41 @@
+{% extends "base.html" %}
+
+{% block title %}Custom Page Title{% endblock %}
+
+{% block additional_css %}
+    <!-- Additional CSS files specific to this page -->
+{% endblock %}
+
+{% block content %}
+    <h1>My Bookings</h1>
+    <h2>Welcome, {{ user.first_name }}!</h2>
+    
+    {% if bookings %}
+    <table border="1">
+        <tr>
+            <th>Apartment</th>
+            <th>Room Number</th>
+            <th>Landlord</th>
+            <th>Approve</th>
+        </tr>
+        {% for booking in bookings %}
+        <tr>
+            <td>{{ booking.apartment }}</td>
+            <td>{{ booking.room_number }}</td>
+            <td>{{ booking.landlord }}</td>
+            <td>{{ booking.approve }}</td>
+        </tr>
+        {% endfor %}
+    </table>
+    {% else %}
+    <p>No bookings found.</p>
+    {% endif %}
+
+
+    
+{% endblock %}
+
+{% block additional_scripts %}
+    <!-- Additional JS scripts specific to this page -->
+{% endblock %}
+

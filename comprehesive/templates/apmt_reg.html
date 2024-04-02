@@ -1,0 +1,140 @@
+{% extends "base.html" %}
+
+{% block title %}Apartment Registration{% endblock %}
+
+{% block additional_css %}
+    <style>
+        /* Add custom CSS styles here */
+        /* Form container */
+        .form-container {
+            max-width: 600px;
+            margin: 20px auto;
+            padding: 20px;
+            background-color: #f9f9f9;
+            border-radius: 8px;
+            box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+        }
+
+        /* Form elements */
+        label {
+            display: block;
+            margin-bottom: 10px;
+            font-weight: bold;
+        }
+
+        input[type="text"],
+        input[type="number"],
+        textarea,
+        select {
+            width: calc(100% - 20px);
+            padding: 10px;
+            margin-bottom: 15px;
+            border: 1px solid #ccc;
+            border-radius: 4px;
+            box-sizing: border-box;
+        }
+
+        input[type="radio"] {
+            margin-right: 5px;
+        }
+
+        button[type="submit"] {
+            background-color: #4caf50;
+            color: white;
+            padding: 10px 20px;
+            border: none;
+            border-radius: 4px;
+            cursor: pointer;
+        }
+
+        button[type="submit"]:hover {
+            background-color: #45a049;
+        }
+    </style>
+{% endblock %}
+
+{% block content %}
+<div class="form-container">
+    <h2>Apartment Registration</h2>
+    <form action="{{ url_for('register_apartment') }}" method="post" enctype="multipart/form-data">
+        <!-- Apartment name -->
+        <div>
+            <label for="name">Apartment name</label>
+            <input id="name" type="text" name="name" required>
+        </div>
+
+        <!-- Address -->
+        <div>
+            <label for="Address">Address</label>
+            <input id="Address" type="text" name="Address" required>
+        </div>
+
+        <!-- Landmark and Plot number -->
+        <div class="row">
+            <div class="col-md-6 col-sm-12">
+                <label for="Landmark">Landmark</label>
+                <input id="Landmark" type="text" name="Landmark" required>
+            </div>
+            <div class="col-md-6 col-sm-12">
+                <label for="Plot">Plot number</label>
+                <input id="Plot" type="number" name="Plot" required>
+            </div>
+        </div>
+
+        <!-- City, Country, and Availability -->
+        <div class="row">
+            <div class="col-md-6 col-sm-12">
+                <label for="City">City</label>
+                <input id="City" type="text" name="City" required>
+            </div>
+            <div class="col-md-6 col-sm-12">
+                <label for="Country">County</label>
+                <input id="Country" type="text" name="Country" required>
+            </div>
+        </div>
+        <div>
+            <h4>Availability</h4>
+            <div>
+                <input type="radio" name="Availability" id="vacant" value="Vacant">
+                <label for="vacant">Vacant</label>
+            </div>
+            <div>
+                <input type="radio" name="Availability" id="occupied" value="Occupied">
+                <label for="occupied">Occupied</label>
+            </div>
+        </div>
+
+        <!-- Area and Price -->
+        <div class="row">
+            <div class="col-md-6 col-sm-12">
+                <label for="Area">Parking Area</label>
+                <input id="Area" type="number" name="Area" required>
+            </div>
+            <div class="col-md-6 col-sm-12">
+                <label for="Price">Price</label>
+                <input id="Price" type="number" name="Price" required>
+            </div>
+        </div>
+
+        <!-- Facilities -->
+        <div>
+            <label for="Facilities">Facilities</label>
+            <input id="Facilities" type="text" name="Facilities" required>
+        </div>
+
+        <!-- Description -->
+        <div>
+            <label for="Description">Description</label>
+            <input id="Description" type="text" name="Description" required>
+        </div>
+
+        <!-- Image -->
+        <div>
+            <label for="file">Upload Image</label>
+            <input id="file" type="file" name="file" required>
+        </div>
+
+        <button type="submit">Register Apartment</button>
+    </form>
+</div>
+{% endblock %}
